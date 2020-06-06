@@ -1,0 +1,159 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Projects</li>
+    </ol>
+</nav>
+<div class="row">
+    <div class="col-10 mx-auto">
+        <table class="table table-hover">
+            <thead>
+                <th>PROJECT ID</th>
+                <th>PROJECT NAME</th>
+                <th>DATE OF START</th>
+                <th>TEAM SIZE</th>
+                <th>ACTIONS</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let project of projects; let i = index">
+                    <td>{{project.projectId}}</td>
+                    <td>{{project.projectName}}</td>
+                    <td>{{project.dateOfStart | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{project.teamSize}}</td>
+                    <td>
+                        <button class="btn btn-info" (click)="onEditClick($event, i)">Edit</button>
+                        &nbsp;
+                        <button class="btn btn-danger" (click)="deleteProject($event, i)">Delete</button>
+                    </td>
+                   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<form>
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Add Project
+              </button>
+              
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header" style="background-color: lightgray;">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Project</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group row">
+                        <label for="txtNewProjectId" class="col-sm-5 col-form-lebel" style="width: auto;">Project ID</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="txtNewProjectId" style="width: auto;" class="form-control" placeholder="Project Id" 
+                            name="projectId" [(ngModel)]="newProject.projectId">
+                        </div>
+                      </div>
+    
+                      <div class="form-group row">
+                        <label for="txtNewProjectName" class="col-sm-5 col-form-lebel" style="width: auto;">Project Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="txtNewProjectName" style="width: auto;" class="form-control" 
+                            placeholder="Project Name" name="projectName" [(ngModel)]="newProject.projectName">
+                        </div>
+                      </div>
+    
+                      <div class="form-group row">
+                        <label for="txtNewProjectDate" class="col-sm-5 col-form-lebel" style="width: auto;">Project Start Date</label>
+                        <div class="col-sm-6">
+                            <input type="date" id="txtNewProjectDate" style="width: auto;" class="form-control" placeholder="Project Start Date"
+                            name="dateOfStart" [(ngModel)]="newProject.dateOfStart">
+                        </div>
+                      </div>
+    
+                      <div class="form-group row">
+                        <label for="txtNewProjectTeamSize" class="col-sm-5 col-form-lebel" style="width: auto;">Team Size</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="txtNewProjectTeamSize" style="width: auto;" class="form-control" placeholder="Team Size"
+                            name="teamSize" [(ngModel)]="newProject.teamSize">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer" style="background-color: lightgray;">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addNewProject()">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    
+    </div>
+</form>
+
+
+<form>
+  <div class="row">
+      <div class="col-10 mx-auto">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+              Edit Project
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header" style="background-color: lightgray;">
+                    <h5 class="modal-title" id="editModalLabel">Edit Project</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group row">
+                      <label for="txtEditProjectId" class="col-sm-5 col-form-lebel" style="width: auto;">Project ID</label>
+                      <div class="col-sm-6">
+                          <input type="text" id="txtEditProjectId" style="width: auto;" class="form-control-plain-text" placeholder="Project Id" 
+                          name="projectId" [(ngModel)]="editProject.projectId" disabled>
+                      </div>
+                    </div>
+  
+                    <div class="form-group row">
+                      <label for="txtEditProjectName" class="col-sm-5 col-form-lebel" style="width: auto;">Project Name</label>
+                      <div class="col-sm-6">
+                          <input type="text" id="txtEditProjectName" style="width: auto;" class="form-control" 
+                          placeholder="Project Name" name="projectName" [(ngModel)]="editProject.projectName">
+                      </div>
+                    </div>
+  
+                    <div class="form-group row">
+                      <label for="txtEditProjectDate" class="col-sm-5 col-form-lebel" style="width: auto;">Project Start Date</label>
+                      <div class="col-sm-6">
+                          <input type="date" id="txtEditProjectDate" style="width: auto;" class="form-control" placeholder="Project Start Date"
+                          name="dateOfStart" [(ngModel)]="editProject.dateOfStart">
+                      </div>
+                    </div>
+  
+                    <div class="form-group row">
+                      <label for="txtEditProjectTeamSize" class="col-sm-5 col-form-lebel" style="width: auto;">Team Size</label>
+                      <div class="col-sm-6">
+                          <input type="text" id="txtEditProjectTeamSize" style="width: auto;" class="form-control" placeholder="Team Size"
+                          name="teamSize" [(ngModel)]="editProject.teamSize">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer" style="background-color: lightgray;">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onUpdateClick()">Edit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+  
+  </div>
+</form>
+
